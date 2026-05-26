@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Miles Morales Vibes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+      background: radial-gradient(circle at top, #250000, #050505 60%);
+      color: white;
+    }
+
+    .bg-glow {
+      position: fixed;
+      width: 500px;
+      height: 500px;
+      background: rgba(255, 0, 0, 0.2);
+      filter: blur(120px);
+      border-radius: 50%;
+      top: -100px;
+      right: -100px;
+      z-index: -1;
+      animation: pulse 6s infinite alternate;
+    }
+
+    @keyframes pulse {
+      from {
+        transform: scale(1);
+        opacity: 0.5;
+      }
+      to {
+        transform: scale(1.3);
+        opacity: 0.9;
+      }
+    }
+
+    header {
+      width: 100%;
+      padding: 25px 8%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      backdrop-filter: blur(12px);
+      background: rgba(0,0,0,0.2);
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: #ff3030;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: white;
+      margin-left: 30px;
+      transition: 0.3s;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      color: #ff3030;
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 8%;
+      position: relative;
+    }
+
+    .hero-text {
+      max-width: 600px;
+      animation: fadeIn 1.5s ease;
+    }
+
+    .hero-text h1 {
+      font-size: 5rem;
+      line-height: 1;
+      margin-bottom: 20px;
+    }
+
+    .hero-text h1 span {
+      color: #ff3030;
+      text-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+    }
+
+    .hero-text p {
+      color: #cfcfcf;
+      line-height: 1.7;
+      margin-bottom: 35px;
+    }
+
+    .btn {
+      padding: 14px 30px;
+      border-radius: 40px;
+      border: none;
+      background: linear-gradient(45deg, #ff0000, #850000);
+      color: white;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 600;
+      transition: 0.3s;
+      box-shadow: 0 0 20px rgba(255,0,0,0.4);
+    }
+
+    .btn:hover {
+      transform: translateY(-4px) scale(1.03);
+      box-shadow: 0 0 35px rgba(255,0,0,0.8);
+    }
+
+    .hero-image {
+      position: relative;
+      width: 420px;
+      height: 420px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,0,0,0.4), transparent 70%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .hero-image img {
+      width: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 0 30px rgba(255,0,0,0.6));
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-20px);
+      }
+      100% {
+        transform: translateY(0px);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+      padding: 80px 8%;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 25px;
+      padding: 30px;
+      backdrop-filter: blur(15px);
+      transition: 0.4s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      background: rgba(255,0,0,0.2);
+      border-radius: 50%;
+      top: -80px;
+      right: -80px;
+      filter: blur(50px);
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      border-color: rgba(255,0,0,0.4);
+    }
+
+    .card h2 {
+      margin-bottom: 15px;
+      color: #ff4040;
+    }
+
+    .card p {
+      color: #d5d5d5;
+      line-height: 1.6;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      color: #888;
+    }
+
+    .spider {
+      position: absolute;
+      width: 3px;
+      height: 180px;
+      background: white;
+      top: 0;
+      left: 80%;
+      animation: swing 4s ease-in-out infinite;
+      transform-origin: top;
+    }
+
+    .spider::after {
+      content: "🕷️";
+      position: absolute;
+      bottom: -15px;
+      left: -10px;
+      font-size: 1.4rem;
+    }
+
+    @keyframes swing {
+      0% {
+        transform: rotate(6deg);
+      }
+      50% {
+        transform: rotate(-6deg);
+      }
+      100% {
+        transform: rotate(6deg);
+      }
+    }
+
+    @media(max-width: 950px) {
+      .hero {
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        gap: 40px;
+        padding-top: 120px;
+      }
+
+      .hero-text h1 {
+        font-size: 3.5rem;
+      }
+
+      .hero-image {
+        width: 300px;
+        height: 300px;
+      }
+
+      nav {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-glow"></div>
+  <div class="spider"></div>
+
+  <header>
+    <div class="logo">MILES.</div>
+
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">Vibes</a>
+      <a href="#">Universe</a>
+      <a href="#">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-text">
+      <h1>Into The <span>Spider-Verse</span></h1>
+
+      <p>
+        Neon lights. Brooklyn nights. Headphones on. Code running.
+        Built with pure HTML, CSS & JavaScript inspired by Miles Morales energy ⚡
+      </p>
+
+      <button class="btn" onclick="showMessage()">Feel The Vibe</button>
+    </div>
+
+    <div class="hero-image">
+      <img src="Screenshot 2026-05-24 at 11.52.45.png" alt="Miles Morales" />
+    </div>
+  </section>
+
+  <section class="cards">
+    <div class="card">
+      <h2>🎧 Music</h2>
+      <p>
+        Lo-fi beats, Sunflower playing in the background, coding till 2AM.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>🕸️ Style</h2>
+      <p>
+        Dark aesthetic UI with glowing reds and glassmorphism effects.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>⚡ Energy</h2>
+      <p>
+        The vibe of building something huge from your bedroom setup.
+      </p>
+    </div>
+  </section>
+
+  <footer>
+    Built with Miles Morales vibes 🕷️
+  </footer>
+
+  <script>
+    function showMessage() {
+      const messages = [
+        "Nah this vibe is actually insane 🔥",
+        "Keep building. One day this becomes real ⚡",
+        "Brooklyn energy activated 🕸️",
+        "You are entering the Spider-Verse 😮‍💨"
+      ];
+
+      const random = Math.floor(Math.random() * messages.length);
+
+      alert(messages[random]);
+    }
+
+    document.addEventListener('mousemove', (e) => {
+      const glow = document.querySelector('.bg-glow');
+
+      glow.style.left = e.clientX - 250 + 'px';
+      glow.style.top = e.clientY - 250 + 'px';
+    });
+  </script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Miles Morales Vibes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+      background: radial-gradient(circle at top, #250000, #050505 60%);
+      color: white;
+    }
+
+    .bg-glow {
+      position: fixed;
+      width: 500px;
+      height: 500px;
+      background: rgba(255, 0, 0, 0.2);
+      filter: blur(120px);
+      border-radius: 50%;
+      top: -100px;
+      right: -100px;
+      z-index: -1;
+      animation: pulse 6s infinite alternate;
+    }
+
+    @keyframes pulse {
+      from {
+        transform: scale(1);
+        opacity: 0.5;
+      }
+      to {
+        transform: scale(1.3);
+        opacity: 0.9;
+      }
+    }
+
+    header {
+      width: 100%;
+      padding: 25px 8%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      backdrop-filter: blur(12px);
+      background: rgba(0,0,0,0.2);
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: #ff3030;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: white;
+      margin-left: 30px;
+      transition: 0.3s;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      color: #ff3030;
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 8%;
+      position: relative;
+    }
+
+    .hero-text {
+      max-width: 600px;
+      animation: fadeIn 1.5s ease;
+    }
+
+    .hero-text h1 {
+      font-size: 5rem;
+      line-height: 1;
+      margin-bottom: 20px;
+    }
+
+    .hero-text h1 span {
+      color: #ff3030;
+      text-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+    }
+
+    .hero-text p {
+      color: #cfcfcf;
+      line-height: 1.7;
+      margin-bottom: 35px;
+    }
+
+    .btn {
+      padding: 14px 30px;
+      border-radius: 40px;
+      border: none;
+      background: linear-gradient(45deg, #ff0000, #850000);
+      color: white;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 600;
+      transition: 0.3s;
+      box-shadow: 0 0 20px rgba(255,0,0,0.4);
+    }
+
+    .btn:hover {
+      transform: translateY(-4px) scale(1.03);
+      box-shadow: 0 0 35px rgba(255,0,0,0.8);
+    }
+
+    .hero-image {
+      position: relative;
+      width: 420px;
+      height: 420px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,0,0,0.4), transparent 70%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .hero-image img {
+      width: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 0 30px rgba(255,0,0,0.6));
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-20px);
+      }
+      100% {
+        transform: translateY(0px);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+      padding: 80px 8%;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 25px;
+      padding: 30px;
+      backdrop-filter: blur(15px);
+      transition: 0.4s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      background: rgba(255,0,0,0.2);
+      border-radius: 50%;
+      top: -80px;
+      right: -80px;
+      filter: blur(50px);
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      border-color: rgba(255,0,0,0.4);
+    }
+
+    .card h2 {
+      margin-bottom: 15px;
+      color: #ff4040;
+    }
+
+    .card p {
+      color: #d5d5d5;
+      line-height: 1.6;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      color: #888;
+    }
+
+    .spider {
+      position: absolute;
+      width: 3px;
+      height: 180px;
+      background: white;
+      top: 0;
+      left: 80%;
+      animation: swing 4s ease-in-out infinite;
+      transform-origin: top;
+    }
+
+    .spider::after {
+      content: "🕷️";
+      position: absolute;
+      bottom: -15px;
+      left: -10px;
+      font-size: 1.4rem;
+    }
+
+    @keyframes swing {
+      0% {
+        transform: rotate(6deg);
+      }
+      50% {
+        transform: rotate(-6deg);
+      }
+      100% {
+        transform: rotate(6deg);
+      }
+    }
+
+    .particles {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      overflow: hidden;
+      z-index: -2;
+    }
+
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: rgba(255,255,255,0.7);
+      border-radius: 50%;
+      bottom: -20px;
+      animation: rise linear infinite;
+    }
+
+    @keyframes rise {
+      from {
+        transform: translateY(0);
+      }
+      to {
+        transform: translateY(-120vh);
+      }
+    }
+
+    .typing-box {
+      margin-top: 20px;
+      font-size: 1.1rem;
+      color: #ff5c5c;
+      min-height: 30px;
+      letter-spacing: 1px;
+    }
+
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      padding: 40px 8%;
+      flex-wrap: wrap;
+    }
+
+    .stat {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 25px 35px;
+      border-radius: 25px;
+      backdrop-filter: blur(12px);
+      text-align: center;
+      transition: 0.3s;
+    }
+
+    .stat:hover {
+      transform: scale(1.05);
+      border-color: rgba(255,0,0,0.5);
+    }
+
+    .stat h3 {
+      font-size: 2rem;
+      color: #ff4040;
+    }
+
+    .quote-section {
+      padding: 100px 8%;
+      text-align: center;
+    }
+
+    .quote-section h2 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+
+    .quote-section p {
+      max-width: 700px;
+      margin: auto;
+      color: #d0d0d0;
+      line-height: 1.8;
+      font-size: 1.1rem;
+    }
+
+    @media(max-width: 950px) {
+      .hero {
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        gap: 40px;
+        padding-top: 120px;
+      }
+
+      .hero-text h1 {
+        font-size: 3.5rem;
+      }
+
+      .hero-image {
+        width: 300px;
+        height: 300px;
+      }
+
+      nav {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-glow"></div>
+  <div class="spider"></div>
+
+  <header>
+    <div class="logo">MILES.</div>
+
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">Vibes</a>
+      <a href="#">Universe</a>
+      <a href="#">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-text">
+      <h1>Into The <span>Spider-Verse</span></h1>
+
+      <p>
+        Neon lights. Brooklyn nights. Headphones on. Code running.
+        Built with pure HTML, CSS & JavaScript inspired by Miles Morales energy ⚡
+      </p>
+
+      <button class="btn" onclick="showMessage()">Feel The Vibe</button>
+
+      <div class="typing-box" id="typing"></div>
+    </div>
+
+    <div class="hero-image">
+      <img src="new.png" alt="Miles Morales" />
+    </div>
+  </section>
+
+  <section class="cards">
+    <div class="card">
+      <h2>🎧 Music</h2>
+      <p>
+        Lo-fi beats, Sunflower playing in the background, coding till 2AM.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>🕸️ Style</h2>
+      <p>
+        Dark aesthetic UI with glowing reds and glassmorphism effects.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>⚡ Energy</h2>
+      <p>
+        The vibe of building something huge from your bedroom setup.
+      </p>
+    </div>
+  </section>
+
+  <section class="stats">
+    <div class="stat">
+      <h3>2AM</h3>
+      <p>Peak Coding Hours</p>
+    </div>
+
+    <div class="stat">
+      <h3>99%</h3>
+      <p>Delusion + Confidence</p>
+    </div>
+
+    <div class="stat">
+      <h3>∞</h3>
+      <p>Spider-Verse Energy</p>
+    </div>
+  </section>
+
+  <section class="quote-section">
+    <h2>"Nah. Imma do my own thing."</h2>
+
+    <p>
+      Some people wait for permission. Some wait for motivation.
+      But somewhere in a dark room with headphones on and Sunflower playing,
+      someone is building their future one line of code at a time.
+    </p>
+  </section>
+
+  <footer>
+    Built with Miles Morales vibes 🕷️
+  </footer>
+
+  <script>
+    function showMessage() {
+      const messages = [
+        "Nah this vibe is actually insane 🔥",
+        "Keep building. One day this becomes real ⚡",
+        "Brooklyn energy activated 🕸️",
+        "You are entering the Spider-Verse 😮‍💨"
+      ];
+
+      const random = Math.floor(Math.random() * messages.length);
+
+      alert(messages[random]);
+    }
+
+    document.addEventListener('mousemove', (e) => {
+      const glow = document.querySelector('.bg-glow');
+
+      glow.style.left = e.clientX - 250 + 'px';
+      glow.style.top = e.clientY - 250 + 'px';
+    });
+  
+    // Particle generation
+    const particleContainer = document.createElement('div');
+    particleContainer.classList.add('particles');
+    document.body.appendChild(particleContainer);
+
+    for (let i = 0; i < 40; i++) {
+      const particle = document.createElement('span');
+      particle.classList.add('particle');
+      particle.style.left = Math.random() * 100 + 'vw';
+      particle.style.animationDuration = (Math.random() * 5 + 3) + 's';
+      particle.style.opacity = Math.random();
+      particleContainer.appendChild(particle);
+    }
+
+    // Typing effect
+    const text = "Code. Create. Become Legendary.";
+    let index = 0;
+
+    function typingEffect() {
+      const typing = document.getElementById('typing');
+
+      if (index < text.length) {
+        typing.innerHTML += text.charAt(index);
+        index++;
+        setTimeout(typingEffect, 80);
+      }
+    }
+
+    typingEffect();
+  </script>
+</body>
+</html>
+
+</body>
+</html>
